@@ -1,4 +1,4 @@
-import card.py
+import card
 
 class Kit():
     def __init__(self, name):

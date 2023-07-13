@@ -1,13 +1,16 @@
-Import Kit
-Import Card
+import Kit
+import card
+
 
 class User:
-    def __init__(self, __kits:list(Kit), __password:str, __username:str):
+    def __init__(self, user:str):
         self.__kits = []
-        self.__username = ""
-        self.__password = ""
+        self.__username = user
         #self.__level
         print ("The User was built")
+
+    def get_username(self) -> str:
+        return self.__username
 
     def add_kit(self, kit:Kit) -> None:
         name = input()
