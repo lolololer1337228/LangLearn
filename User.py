@@ -1,5 +1,5 @@
 import Kit
-import card
+import Card
 
 
 class User:

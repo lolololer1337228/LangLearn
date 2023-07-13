@@ -1,4 +1,4 @@
-import card
+import Card
 import Kit
 import User
 import subprocess
@@ -61,7 +61,7 @@ def handle_input():
             print("Некорректный ввод. Попробуйте снова.")
 def execute_command_kit(command, kit_number_input):
     if command == 'command_1':
-        cardi = card.Card()
+        cardi = Card.Card()
         cardi.edit_card(input("Введите слово и его перевод: ").split(' '))
         u.get_kit_by_ID(kit_number_input).add_card(cardi)
 
