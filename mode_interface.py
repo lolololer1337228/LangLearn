@@ -18,3 +18,11 @@ class ModeStrategy(object):
 
     def next_word(self, boolean) -> None:
         raise NotImplementedError
+
+
+class ModeWrite(ModeStrategy):
+    def check(answer, index):
+        return answer == self.sequence[index].get_card_content()[1]
+
+
+class ModeRotate
