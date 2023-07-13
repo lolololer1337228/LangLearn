@@ -1,9 +1,20 @@
-class ModeStrategy:
-    def __init__(flag, card_kit):
+import Kit.py
+import Card.py
+
+
+class ModeStrategy(object):
+    def __init__(self, flag, sequence):
         self.__flag = flag
-        self.__card_kit = card_kit
+        self.sequence = sequence
 
-    def create_sequence(self):
-        return sorted(self.__card_kit, key=lambda x: -x.rate)
+    def create_sequence(self, kit: Kit) -> list(Card):
+        raise NotImplementedError
 
-    def 
+    def change_rate(self, boolean):
+        raise NotImplementedError
+
+    def change_word_translation(self, boolean):
+        raise NotImplementedError
+
+    def next_word(self, boolean) -> None:
+        raise NotImplementedError
