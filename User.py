@@ -12,14 +12,15 @@ class User:
     def get_username(self) -> str:
         return self.__username
 
+    def get_kit_by_ID(self, id) -> Kit:
+        return self.__kits[id]
+
     def add_kit(self, kit:Kit) -> None:
-        name = input()
-        k = kit(name)
-        self.__kits.append(k)
+        self.__kits.append(kit)
 
     def show_kits(self) -> None:
         for i in range(len(self.__kits)):
-            print(i, self.__kits[i].get_name_kit)
+            print(i, self.__kits[i].get_name_kit())
 
     def show_element_of_kit(self, i:int) -> None:
         Ar = self.__kits[i]

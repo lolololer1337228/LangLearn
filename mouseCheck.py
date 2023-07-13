@@ -14,6 +14,7 @@ class ArrowKeyListener:
     def start_listening(self):
         keyboard.on_release(self.on_key_release)
 
+    @staticmethod
     def stop_listening(self):
         keyboard.unhook_all()
 
