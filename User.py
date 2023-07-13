@@ -2,11 +2,11 @@ Import Kit
 Import Card
 
 class User:
-    def __init__(self, __kits:list(Kit), __email:str, __username:str, __level):
-        self.__kits = [kits() for i in range(kits) ];
-        self.__email;
-        self.__username;
-        self.__level;
+    def __init__(self, __kits:list(Kit), __password:str, __username:str):
+        self.__kits = []
+        self.__username = ""
+        self.__password = ""
+        #self.__level
         print ("The User was built")
 
     def add_kit(self, kit:Kit) -> None:
