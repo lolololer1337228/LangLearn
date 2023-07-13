@@ -1,17 +1,16 @@
-import array
-import Card
+import card.py
 
 class Kit():
-    def __init__(self, name, cards, progress):
+    def __init__(self, name):
       self.__name = name
-      self.__card_array = cards
-      self.__progress = progress
+      self.__card_list = []
+      self.__progress = 0
 
     def get_name_kit(self) -> str:
         return self.__name
 
-    def get_array_of_kit(self) -> array:
-        return self.__card_array
+    def get_array_of_kit(self) -> list:
+        return self.__card_list
 
     def change_name(self, new_name) -> bool:
         old_name = self.__name
@@ -19,16 +18,27 @@ class Kit():
         return self.__name != old_name
 
     def add_card(self, new_card) -> None:
-        self.__card_array.append(new_card)
+        self.__card_list.append(new_card)
 
     def remove_card(self, card_index) -> None:
-        self.__card_array.pop(card_index)
+        self.__card_list.pop(card_index)
 
-    def progress_counter(self) -> float:
+    def __progress_counter(self) -> None:
         sum_rate = 0
-        for elem in self.__card_array:
-            sum_rate += elem.get_rate_1() + elem.get_rate_2() + elem.get_rate_3()
-        return sum_rate / len(self.__card_array)
+        for elem in self.__card_list:
+            rate_list = elem.get_rates()
+            for now_rate in rate_list:
+                sum_rate += now_rate
+            self.__progress = (sum_rate / len(self.__card_list))
+
+    def get_progress(self) -> float:
+        self.__progress_counter()
+        return self.__progress
+
+    def reset_counter(self) -> None:
+        self.__progress = 0
+
+    #def start_mode1(self):
 
 
 
