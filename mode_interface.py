@@ -1,5 +1,5 @@
-import Kit.py
-import Card.py
+import Kit
+import Card
 import random
 
 
@@ -48,9 +48,17 @@ class ModeStrategy(object):
                 = self.__sequence[i][0].get_card_content()[1], self.__sequence[i][0].get_card_content()[0]
 
 
+class ModeChoice(ModeStrategy):
+    def random_words(self, answer, index):
+        alternative = [answer, 0, 0, 0]
+        for i in range (1,3):
+            alternative[i] = random.choise(self.__sequence)
+
+
+    def label(self, is_correct) -> bool:
+        pass
+
+
 class ModeWrite(ModeStrategy):
-    def check(answer, index):
+    def check(self, answer, index):
         return answer == self.sequence[index].get_card_content()[1]
-
-
-class ModeRotate
