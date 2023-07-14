@@ -69,11 +69,13 @@ class ModeStrategy():
         return self.__sequence
 
 class ModeChoice(ModeStrategy):
-    def random_words(self, index, seq):
-        __sequence = seq
-        variants = [self.__sequence[index]]
-        other_words_sequence = self.__sequence
-        other_words_sequence.remove(self.__sequence[index])
+    def random_words(self, index, __sequence):
+        variants = [__sequence[index]]
+        other_words_sequence = []
+        for i in range(0, len(__sequence)):
+            if __sequence[i] != __sequence[index]:
+                other_words_sequence.append(__sequence[i])
+        other_words_sequence.remove(__sequence[index])
         variants += random.sample(other_words_sequence, 3)  # list из элементов __sequence [правильный, рандом, рандом, рандом]
         random_index = random.randint(0, 3)  # по этому индексу будет лежать правильный ответ
         variants[0], variants[random_index] = variants[random_index], variants[0]

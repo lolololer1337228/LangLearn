@@ -6,7 +6,6 @@ class User:
     def __init__(self, user:str):
         self.__kits = []
         self.__username = user
-        #self.__level
         print ("The User was built")
 
     def get_username(self) -> str:
