@@ -29,6 +29,10 @@ kit_show_items = {
     '5': {
         'name': 'Удалить набор',
         'command':'kit_menu_command_5',
+    },
+    '6': {
+        'name': 'Запустить режим 1',
+        'command':'kit_menu_command_6',
     }
 }
 

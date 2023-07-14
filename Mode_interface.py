@@ -4,9 +4,11 @@ import random
 
 
 class ModeStrategy(object):
-    def __init__(self, flag):
+    def __init__(self, flag, kit: Kit, mode):
         self.__flag = flag
+        self.__kit = kit
         self.__sequence = []
+        self.__mode = mode
 
     def __rate_filter(self, card_list: list, mode, limit):  # фильтр для взятия слов с определённым рейтингом
         filter_list = []
@@ -15,8 +17,8 @@ class ModeStrategy(object):
                 filter_list.append(elem)
         return filter_list
 
-    def create_sequence(self, kit: Kit, mode) -> list(Card):
-        card_list = kit.get_card_list()
+    def create_sequence(self, __kit: Kit, mode) -> list(Card):
+        card_list = __kit.get_card_list()
         number_sequence = []
         for i in range(0, len(card_list)):
             number_sequence[i] = i
@@ -30,7 +32,9 @@ class ModeStrategy(object):
             if len(self.__sequence) <= 2 * len(card_list):
                 sequence03 = random.shuffle(self.__rate_filter(card_list, mode, 0.3))
                 self.__sequence += sequence03
-        del self.__sequence[2 * len(card_list):]  # обрезаем последовательность до размера 2n
+        del self.__sequence[2 * len(card_list):]
+
+        # обрезаем последовательность до размера 2n
 
     def change_rate(self, kit: Kit, mode, index, is_correct):
         if is_correct:
@@ -55,10 +59,11 @@ class ModeChoice(ModeStrategy):
             alternative[i] = random.choise(self.__sequence)
 
 
-    def label(self, is_correct) -> bool:
-        pass
+   # def label(self, is_correct) -> bool:
+   #     pass
 
 
 class ModeWrite(ModeStrategy):
     def check(self, answer, index):
         return answer == self.sequence[index].get_card_content()[1]
+

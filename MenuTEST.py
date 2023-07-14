@@ -149,6 +149,8 @@ def execute_command_kit(command, kit_number_input):
         print("Набор удален")
         display_menu()
         return
+    #elif command == 'kit_menu_command_6': вызов режима ----------------------
+
 
 def execute_command_card(command, kit_number_input, card_number_input):
     if command == 'card_menu_command_1':
