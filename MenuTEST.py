@@ -29,6 +29,7 @@ def display_cards_menu():
         print(f"{key}. {item['name']}")
     print()
     print("Выберите пункт меню по номеру или введите 'q' для выхода")
+    #ПРОВЕРКА НА ЕБЛАНА
 
 def handle_input():
     while True:
