@@ -57,7 +57,7 @@ menu_show_items = {
         'command': 'mode_menu_command_2',
     },
     '3': {
-        'name': 'Режим карточек(NONE)',
+        'name': 'Режим карточек(Coming soon!)',
         'command': 'mode_menu_command_3',
     },
 }

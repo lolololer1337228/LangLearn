@@ -17,7 +17,6 @@ class ModeStrategy():
 
     def create_sequence(self, mode) -> None:
         card_list = self.__kit.get_card_list()
-        print(len(card_list))
         number_sequence = []
         for i in range(0, len(card_list)):
             number_sequence.append(i)
@@ -86,7 +85,6 @@ class ModeChoice(ModeStrategy):
 class ModeWrite(ModeStrategy):
     def check(self, answer, index, seq):
         __sequence = seq
-        print(__sequence)
         return answer == __sequence[index][0].get_card_content()[1]
 
 

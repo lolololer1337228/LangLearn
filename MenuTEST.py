@@ -138,7 +138,7 @@ class Menu:
                 return
             elif (card_number_input.isdigit() == False) or (int(card_number_input) > len(u.get_kit_by_ID(kit_number_input).get_card_list()) - 1):
                 print("Некорректный ввод. Попробуйте снова.")
-            elif 0<= int(card_number_input) <9999:
+            else:
                 card_number_input = int(card_number_input)
                 self.display_cards_menu()
                 while True:
@@ -153,8 +153,6 @@ class Menu:
                         self.execute_command_card(command, kit_number_input, card_number_input, u)
                     else:
                         print("Некорректный ввод. Попробуйте снова.")
-            else:
-                print("Некорректный ввод. Попробуйте снова.")
         elif command == 'kit_menu_command_3':
             self.clear_terminal()
             print("Ваш текущий прогресс по данному набору:", "{:.2f}%".format(u.get_kit_by_ID(kit_number_input).get_progress()*100))
@@ -196,7 +194,10 @@ class Menu:
             self.display_mode_menu()
         elif command == 'mode_menu_command_2':
             self.clear_terminal()
-            if u.get_kit_by_ID(kit_number_input).
+            if len(u.get_kit_by_ID(kit_number_input).get_card_list()) < 4:
+                print("Ошибка! Требуется хотя бы 4 карточки в наборе!")
+                self.display_mode_menu()
+                return
             u.get_kit_by_ID(kit_number_input).StartModule(2)
             self.display_mode_menu()
         elif command == 'mode_menu_command_3':
