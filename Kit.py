@@ -4,7 +4,7 @@ class Kit():
     def __init__(self, name):
       self.__name = name
       self.__card_list = []
-      self.__progress = 0
+      self.__progress = 0.0
 
     def get_name_kit(self) -> str:
         return self.__name
