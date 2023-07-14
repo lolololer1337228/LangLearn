@@ -3,7 +3,7 @@ import Card
 import random
 
 
-class ModeStrategy(object):
+class ModeStrategy():
     def __init__(self, flag, kit: Kit, mode):
         self.__flag = flag
         self.__kit = kit
@@ -62,9 +62,9 @@ class ModeChoice(ModeStrategy):
         variants[0], variants[random_index] = variants[random_index], variants[0]
         return [random_index, variants]
 
-    def check(self, kit: Kit, answer, index) -> bool:
-        random_words = self.random_words(Kit, index)  # [индекс правильного, массив со всеми]
-        return answer == random_words[0]  # проверяем ответ(int от 0 до 4) с индексом правильного
+    def check(self, answer, index) -> bool:
+        random_words = self.random_words(self.__kit, index)  # [индекс правильного, массив со всеми]
+        return answer == random_words[0]  # проверяем ответ(int от 0 до 3) с индексом правильного
 
 
 class ModeWrite(ModeStrategy):
