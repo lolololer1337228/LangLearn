@@ -47,31 +47,31 @@ class Kit():
     def StartModule(self, mode):
         if mode == 1:
             Mod = Mode_interface.ModeWrite(self)
-            print("Режим 'Письмо'", '/n')
+            print("Режим 'Письмо'", '\n')
         elif mode == 2:
             Mod = Mode_interface.ModeChoice(self)
-            print("Режим 'Тест'", '/n')
+            print("Режим 'Тест'", '\n')
 
-        now_seq = Mod.create_sequence(mode)
         i = 0
+        Mod.create_sequence(mode)
         while ((i <= len(Mod.get_cards())) and (i < len(Mod.get_cards()) * 2)):
             print("Введите 'q' чтобы выйти из режима", '\n')
-            print(Mod.get_sequence()[i][0])
             current_card = Mod.get_sequence()[i][0]
             if mode == 1:
                 print("Как переводится это слово:", current_card.get_card_content()[0], '\n')
                 user_input = input("Введите перевод")
             elif mode == 2:
-                true_index, current_set = current_card.random_words(i)
-                print("Выберите номер варианта", '\n', current_set[0], current_set[1], current_set[2], current_set[3])
+                print("Слово:", current_card.get_card_content()[0], '\n')
+                true_index, current_set = Mod.random_words(i, Mod.get_sequence())
+                print("Выберите номер варианта", '\n', *[x[0].get_card_content()[1] for x in current_set[:4]])
                 user_input = input()
-            elif (user_input == 'q'):
+            if (user_input == 'q'):
                 break
 
             if mode == 1:
                 answer = Mod.check(user_input, i, Mod.get_sequence())
             elif mode == 2:
-                answer = Mod.check(user_input, i)
+                answer = Mod.check(int(user_input), true_index, Mod.get_sequence())
             if answer:
                 print("Правильно!")
             else:

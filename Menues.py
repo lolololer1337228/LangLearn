@@ -31,7 +31,7 @@ kit_show_items = {
         'command':'kit_menu_command_5',
     },
     '6': {
-        'name': 'Запустить режим 1',
+        'name': 'Запустить режимы',
         'command':'kit_menu_command_6',
     }
 }
@@ -49,15 +49,15 @@ card_show_items = {
 
 menu_show_items = {
     '1': {
-        'name': 'Режим карточек',
+        'name': 'Режим ввода',
         'command': 'mode_menu_command_1',
     },
     '2': {
-        'name': 'Режим квиза',
+        'name': 'Режим теста',
         'command': 'mode_menu_command_2',
     },
     '3': {
-        'name': 'Режим ввода',
+        'name': 'Режим карточек(NONE)',
         'command': 'mode_menu_command_3',
     },
 }

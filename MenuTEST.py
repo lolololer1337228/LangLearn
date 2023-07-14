@@ -174,6 +174,7 @@ class Menu:
             return
         elif command == 'kit_menu_command_6': #вызов режима ----------------------
             self.clear_terminal()
+            self.display_mode_menu()
             while True:
                 user_input = input("Введите номер пункта меню: ")
                 if user_input == 'q':
@@ -195,12 +196,15 @@ class Menu:
             self.display_mode_menu()
         elif command == 'mode_menu_command_2':
             self.clear_terminal()
+            if u.get_kit_by_ID(kit_number_input).
             u.get_kit_by_ID(kit_number_input).StartModule(2)
             self.display_mode_menu()
         elif command == 'mode_menu_command_3':
-            self.clear_terminal()
-            u.get_kit_by_ID(kit_number_input).StartModule(1)#3
-            self.display_mode_menu()
+            self.display_kits_menu()
+            return
+            #self.clear_terminal()
+            #u.get_kit_by_ID(kit_number_input).StartModule(1)#3
+            #self.display_mode_menu()
 
     def execute_command_card(self, command, kit_number_input, card_number_input, user):
         u = user

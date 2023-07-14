@@ -41,7 +41,6 @@ class ModeStrategy():
                     self.__sequence.append(elem)
 
         del self.__sequence[2 * len(card_list):]
-        return self.__sequence
         # обрезаем последовательность до размера 2n
 
     def change_rate(self, mode, index, is_correct):
@@ -71,17 +70,17 @@ class ModeStrategy():
 class ModeChoice(ModeStrategy):
     def random_words(self, index, seq):
         __sequence = seq
-        variants = [self.__sequence[index]]
-        other_words_sequence = self.__sequence
-        other_words_sequence.remove(self.__sequence[index])
+        variants = [__sequence[index]]
+        other_words_sequence = __sequence
+        other_words_sequence.remove(__sequence[index])
         variants += random.sample(other_words_sequence, 3)  # list из элементов __sequence [правильный, рандом, рандом, рандом]
         random_index = random.randint(0, 3)  # по этому индексу будет лежать правильный ответ
         variants[0], variants[random_index] = variants[random_index], variants[0]
         return [random_index, variants]
 
-    def check(self, answer, index) -> bool:
-        random_words = self.random_words(self.__kit, index)  # [индекс правильного, массив со всеми]
-        return answer == random_words[0]  # проверяем ответ(int от 0 до 3) с индексом правильного
+    def check(self, answer, index, seq) -> bool:
+        random_words = self.random_words(index, seq)  # [индекс правильного, массив со всеми]
+        return answer - 1 == random_words[0]  # проверяем ответ(int от 0 до 3) с индексом правильного
 
 
 class ModeWrite(ModeStrategy):
