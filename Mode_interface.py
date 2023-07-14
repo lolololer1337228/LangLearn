@@ -53,7 +53,7 @@ class ModeStrategy():
 
 
 class ModeChoice(ModeStrategy):
-    def random_words(self, kit: Kit, index):
+    def random_words(self, index):
         variants = [self.__sequence[index]]
         other_words_sequence = self.__sequence
         other_words_sequence.remove(self.__sequence[index])
@@ -73,7 +73,7 @@ class ModeWrite(ModeStrategy):
 
 
 class ModeRotation(ModeStrategy):
-    @static_method
+    @staticmethod
     def rotation(current_pair, current_word: str):
         return current_pair[0] if current_word == current_pair[1] else current_pair[2]
 

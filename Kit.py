@@ -60,7 +60,7 @@ class Kit():
                 print("Как переводится это слово:", current_card.get_card_content()[0], '\n')
                 user_input = input("Введите перевод")
             elif mode == 2:
-                true_index, current_set = current_card.random_words()
+                true_index, current_set = current_card.random_words(i)
                 print("Выберите номер варианта", '\n', current_set[0], current_set[1], current_set[2], current_set[3])
                 user_input = input()
             elif (user_input == 'q'):
