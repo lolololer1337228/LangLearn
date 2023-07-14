@@ -3,7 +3,7 @@ import Card
 import random
 
 
-class ModeStrategy():
+class ModeStrategy:
     def __init__(self, flag, kit: Kit, mode):
         self.__flag = flag
         self.__kit = kit
