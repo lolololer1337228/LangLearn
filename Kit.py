@@ -2,6 +2,7 @@ import Card
 import os
 import time
 import Mode_interface
+import MenuTEST
 
 
 
@@ -31,7 +32,7 @@ class Kit():
     def __progress_counter(self) -> None:
         sum_rate = 0
         for elem in self.__card_list:
-            rate_list = elem.get_rates()
+            rate_list = elem.get_word_rates()
             for now_rate in rate_list:
                 sum_rate += now_rate
             self.__progress = (sum_rate / len(self.__card_list))
@@ -45,17 +46,18 @@ class Kit():
 
     def StartModule(self, mode):
         if mode == 1:
-            Mod = Mode_interface.ModeWrite(self, mode)
+            Mod = Mode_interface.ModeWrite(self)
             print("Режим 'Письмо'", '/n')
         elif mode == 2:
-            Mod = Mode_interface.ModeChoice(self, mode)
+            Mod = Mode_interface.ModeChoice(self)
             print("Режим 'Тест'", '/n')
 
-        Mod.create_sequence(self, mode)
+        now_seq = Mod.create_sequence(mode)
         i = 0
-        while (i != Mod.get_len()):
+        while ((i <= len(Mod.get_cards())) and (i < len(Mod.get_cards()) * 2)):
             print("Введите 'q' чтобы выйти из режима", '\n')
-            current_card = Mod.get_card(i)
+            print(Mod.get_sequence()[i][0])
+            current_card = Mod.get_sequence()[i][0]
             if mode == 1:
                 print("Как переводится это слово:", current_card.get_card_content()[0], '\n')
                 user_input = input("Введите перевод")
@@ -67,17 +69,20 @@ class Kit():
                 break
 
             if mode == 1:
-                answer = Mod.check(user_input, i)
+                answer = Mod.check(user_input, i, Mod.get_sequence())
             elif mode == 2:
                 answer = Mod.check(user_input, i)
             if answer:
                 print("Правильно!")
             else:
                 print("Неправильно")
-            Mod.change_rate(self, mode, i, answer)
+            Mod.change_rate(mode, Mod.get_sequence()[i][1], answer)
             i += 1
             time.sleep(2)
-            os.system('cls')
+            if os.name == 'posix':  # Для Unix-подобных систем (Linux, macOS)
+                os.system('clear')
+            elif os.name == 'nt':  # Для Windows
+                os.system('cls')
 
 
 

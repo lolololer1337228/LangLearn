@@ -4,56 +4,73 @@ import random
 
 
 class ModeStrategy():
-    def __init__(self, flag, kit: Kit, mode):
-        self.__flag = flag
+    def __init__(self, kit: Kit):
         self.__kit = kit
         self.__sequence = []
-        self.__mode = mode
 
     def __rate_filter(self, card_list: list, mode, limit):  # фильтр для взятия слов с определённым рейтингом
         filter_list = []
         for elem in card_list:
-            if(elem[0].get_word_rates[mode]) <= limit:
+            if(elem[0].get_word_rates()[mode]) <= limit:
                 filter_list.append(elem)
         return filter_list
 
     def create_sequence(self, mode) -> None:
         card_list = self.__kit.get_card_list()
+        print(len(card_list))
         number_sequence = []
         for i in range(0, len(card_list)):
-            number_sequence[i] = i
+            number_sequence.append(i)
         card_list = list(zip(card_list, number_sequence))  # присваиваем каждой карточке её индекс в наборе (kit)
-        self.__sequence = random.shuffle(card_list)
-        sequence08 = random.shuffle(self.__rate_filter(card_list, mode, 0.8))
-        self.__sequence += sequence08
+        self.__sequence = card_list
+        random.shuffle(self.__sequence)
+        sequence08 = self.__rate_filter(card_list, mode, 0.8)
+        random.shuffle(sequence08)
+        for elem in sequence08:
+            self.__sequence.append(elem)
         if len(self.__sequence) <= 2 * len(card_list):  # следим, чтобы последовательность не была слишком большой
-            sequence05 = random.shuffle(self.__rate_filter(card_list, mode, 0.5))
-            self.__sequence += sequence05
-            if len(self.__sequence) <= 2 * len(card_list):
-                sequence03 = random.shuffle(self.__rate_filter(card_list, mode, 0.3))
-                self.__sequence += sequence03
-        del self.__sequence[2 * len(card_list):]
+            sequence05 = self.__rate_filter(card_list, mode, 0.5)
+            random.shuffle(sequence05)
+            for elem in sequence05:
+                self.__sequence.append(elem)
 
+            if len(self.__sequence) <= 2 * len(card_list):
+                sequence03 = self.__rate_filter(card_list, mode, 0.3)
+                random.shuffle(sequence03)
+                for elem in sequence03:
+                    self.__sequence.append(elem)
+
+        del self.__sequence[2 * len(card_list):]
+        return self.__sequence
         # обрезаем последовательность до размера 2n
 
-    def change_rate(self, kit: Kit, mode, index, is_correct):
+    def change_rate(self, mode, index, is_correct):
         if is_correct:
-            kit.get_card_list()[index].get_word_rates()[mode] += 0.4  # увеличиваем рейтинг слова
-            if kit.get_card_list()[index].get_word_rates()[mode] > 1:
-                kit.get_card_list()[index].get_word_rates()[mode] = 1
+            self.__kit.get_card_list()[index].get_word_rates()[mode] += 0.1  # увеличиваем рейтинг слова
+            if self.__kit.get_card_list()[index].get_word_rates()[mode] > 1:
+                self.__kit.get_card_list()[index].get_word_rates()[mode] = 1
         else:
-            kit.get_card_list()[index].get_word_rates()[mode] -= 0.4
-            if kit.get_card_list()[index].get_word_rates()[mode] < 0:
-                kit.get_card_list()[index].get_word_rates()[mode] = 0
+            self.__kit.get_card_list()[index].get_word_rates()[mode] -= 0.1
+            if self.__kit.get_card_list()[index].get_word_rates()[mode] < 0:
+                self.__kit.get_card_list()[index].get_word_rates()[mode] = 0
 
     def change_word_translation(self, boolean):
         for i in range (0, len(self.__sequence)):
             self.__sequence[i][0].get_card_content()[0], self.__sequence[i][0].get_card_content()[1]\
                 = self.__sequence[i][0].get_card_content()[1], self.__sequence[i][0].get_card_content()[0]
 
+    def get_cards(self):
+        return self.__kit.get_card_list()
+
+    def get_card(self, index):
+        return self.__kit.get_card_list()[index]
+
+    def get_sequence(self):
+        return self.__sequence
 
 class ModeChoice(ModeStrategy):
-    def random_words(self, index):
+    def random_words(self, index, seq):
+        __sequence = seq
         variants = [self.__sequence[index]]
         other_words_sequence = self.__sequence
         other_words_sequence.remove(self.__sequence[index])
@@ -68,8 +85,10 @@ class ModeChoice(ModeStrategy):
 
 
 class ModeWrite(ModeStrategy):
-    def check(self, answer, index):
-        return answer == self.__sequence[index].get_card_content()[1]
+    def check(self, answer, index, seq):
+        __sequence = seq
+        print(__sequence)
+        return answer == __sequence[index][0].get_card_content()[1]
 
 
 class ModeRotation(ModeStrategy):

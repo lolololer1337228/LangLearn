@@ -5,6 +5,7 @@ import subprocess
 import Menues
 import os
 import time
+import Mode_interface
 
 class Menu:
     def clear_terminal(self):
@@ -120,6 +121,7 @@ class Menu:
                 print("Неправильный ввод!")
                 time.sleep(2)
                 self.execute_command_kit('kit_menu_command_1', kit_number_input, u)
+                return
             cardi.edit_card(cardi_edit_input[0],cardi_edit_input[1])
             u.get_kit_by_ID(kit_number_input).add_card(cardi)
             self.clear_terminal()
@@ -175,23 +177,30 @@ class Menu:
             while True:
                 user_input = input("Введите номер пункта меню: ")
                 if user_input == 'q':
-                    self.display_menu()
+                    self.display_kits_menu()
                     break # Выход из программы
                 elif user_input in Menues.menu_show_items.keys():
                     selected_item = Menues.menu_show_items[user_input]
                     print(f"Выбран пункт меню: {selected_item['name']}")
                     command = selected_item['command']
-                    self.execute_command_mode(command, kit_number_input)
+                    self.execute_command_mode(command, kit_number_input, u)
                 else:
                     print("Некорректный ввод. Попробуйте снова.")
 
-    def execute_command_mode(self, command, kit_number_input):
+    def execute_command_mode(self, command, kit_number_input, user):
+        u = user
         if command == 'mode_menu_command_1':
             self.clear_terminal()
+            u.get_kit_by_ID(kit_number_input).StartModule(1)
+            self.display_mode_menu()
         elif command == 'mode_menu_command_2':
             self.clear_terminal()
+            u.get_kit_by_ID(kit_number_input).StartModule(2)
+            self.display_mode_menu()
         elif command == 'mode_menu_command_3':
             self.clear_terminal()
+            u.get_kit_by_ID(kit_number_input).StartModule(1)#3
+            self.display_mode_menu()
 
     def execute_command_card(self, command, kit_number_input, card_number_input, user):
         u = user

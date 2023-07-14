@@ -6,7 +6,7 @@ class Card:
     def get_card_content(self) -> list:
         return self.__card
 
-    def get_rates(self) -> list:
+    def get_word_rates(self) -> list:
         return self.__word_rates
 
     def edit_card(self, word:str, translation:str) -> None:
