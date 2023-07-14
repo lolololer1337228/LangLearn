@@ -1,5 +1,7 @@
 import Card
 
+
+
 class Kit():
     def __init__(self, name):
       self.__name = name
@@ -9,7 +11,7 @@ class Kit():
     def get_name_kit(self) -> str:
         return self.__name
 
-    def get_array_of_kit(self) -> list:
+    def get_card_list(self) -> list:
         return self.__card_list
 
     def change_name(self, new_name) -> bool:
@@ -38,7 +40,10 @@ class Kit():
     def reset_counter(self) -> None:
         self.__progress = 0
 
-    #def start_mode1(self):
+    #def start_mode(self, number_of_mode):
+     #   if number_of_mode == 0:
+
+
 
 
 

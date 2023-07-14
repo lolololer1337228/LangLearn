@@ -4,8 +4,8 @@ import random
 
 
 class ModeStrategy(object):
-    def __init__(self, flag, kit: Kit, mode):
-        self.__flag = flag
+    def __init__(self, kit: Kit, mode):
+        self.__flag = True
         self.__kit = kit
         self.__sequence = []
         self.__mode = mode
@@ -51,6 +51,12 @@ class ModeStrategy(object):
             self.__sequence[i][0].get_card_content()[0], self.__sequence[i][0].get_card_content()[1]\
                 = self.__sequence[i][0].get_card_content()[1], self.__sequence[i][0].get_card_content()[0]
 
+    def get_card(self, index):
+       return self.__sequence[index]
+
+    def get_len(self):
+        return len(self.__sequence)
+
 
 class ModeChoice(ModeStrategy):
     def random_words(self, answer, index):
@@ -66,4 +72,5 @@ class ModeChoice(ModeStrategy):
 class ModeWrite(ModeStrategy):
     def check(self, answer, index):
         return answer == self.sequence[index].get_card_content()[1]
+
 
