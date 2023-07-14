@@ -83,8 +83,3 @@ class Kit():
                 os.system('clear')
             elif os.name == 'nt':  # Для Windows
                 os.system('cls')
-
-
-
-
-
