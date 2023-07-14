@@ -73,7 +73,8 @@ class ModeWrite(ModeStrategy):
 
 
 class ModeRotation(ModeStrategy):
-    def rotation(self, current_pair, current_word: str):
+    @static_method
+    def rotation(current_pair, current_word: str):
         return current_pair[0] if current_word == current_pair[1] else current_pair[2]
 
     def check(self, answer: bool):
