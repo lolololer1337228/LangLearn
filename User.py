@@ -12,6 +12,9 @@ class User:
     def get_username(self) -> str:
         return self.__username
 
+    def get_count_kits(self):
+        return len(self.__kits)
+
     def get_kit_by_ID(self, id) -> Kit:
         return self.__kits[id]
 

@@ -46,3 +46,18 @@ card_show_items = {
         'command': 'card_menu_command_2',
     },
 }
+
+menu_show_items = {
+    '1': {
+        'name': 'Режим карточек',
+        'command': 'mode_menu_command_1',
+    },
+    '2': {
+        'name': 'Режим квиза',
+        'command': 'mode_menu_command_2',
+    },
+    '3': {
+        'name': 'Режим ввода',
+        'command': 'mode_menu_command_3',
+    },
+}
