@@ -56,15 +56,20 @@ class Kit():
         while (i != Mod.get_len()):
             print("Введите 'q' чтобы выйти из режима", '\n')
             current_card = Mod.get_card(i)
-            print("Как переводится это слово:", current_card.get_card_content()[0], '\n')
-            user_input = input("Введите перевод")
-            if (user_input == 'q') or ():
+            if mode == 1:
+                print("Как переводится это слово:", current_card.get_card_content()[0], '\n')
+                user_input = input("Введите перевод")
+            elif mode == 2:
+                true_index, current_set = current_card.random_words()
+                print("Выберите номер варианта", '\n', current_set[0], current_set[1], current_set[2], current_set[3])
+                user_input = input()
+            elif (user_input == 'q'):
                 break
 
             if mode == 1:
                 answer = Mod.check(user_input, i)
-            #elif mode == 2:
-            #    answer =
+            elif mode == 2:
+                answer = Mod.check(user_input, i)
             if answer:
                 print("Правильно!")
             else:

@@ -78,7 +78,7 @@ class Menu:
             if kit_number_input == 'q':
                 self.display_menu()
                 return
-            elif (type(int(kit_number_input)) == str) or (int(kit_number_input) > u.get_count_kits - 1):
+            elif (type(int(kit_number_input)) == str) or (int(kit_number_input) > u.get_count_kits() - 1):
                 print("Некорректный ввод. Попробуйте снова.")
             elif 0 <= int(kit_number_input) < 9999:
                 kit_number_input = int(kit_number_input)
@@ -136,7 +136,7 @@ class Menu:
                 self.clear_terminal()
                 self.display_kits_menu()
                 return
-            elif (type(int(card_number_input)) == str) or (int(card_number_input) > len(u.get_kit_by_ID(kit_number_input).get_array_of_kit()) - 1):
+            elif (type(int(card_number_input)) == str) or (int(card_number_input) > len(u.get_kit_by_ID(kit_number_input).get_card_list()) - 1):
                 print("Некорректный ввод. Попробуйте снова.")
             elif 0<= int(card_number_input) <9999:
                 card_number_input = int(card_number_input)
@@ -203,7 +203,7 @@ class Menu:
             if edit_input == 'q':
                 self.display_cards_menu()
                 return
-            u.get_kit_by_ID(kit_number_input).get_array_of_kit()[card_number_input].edit_card(edit_input[0],edit_input[1])
+            u.get_kit_by_ID(kit_number_input).get_card_list()[card_number_input].edit_card(edit_input[0],edit_input[1])
             print("Карточка успешно изменена!")
             self.display_cards_menu()
         elif command == 'card_menu_command_2':

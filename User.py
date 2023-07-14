@@ -32,7 +32,7 @@ class User:
         print(i, self.__kits[i].get_name_kit())
 
     def show_element_of_kit(self, i:int) -> None:
-        CardList = self.__kits[i].get_array_of_kit()
+        CardList = self.__kits[i].get_card_list()
         for j in range(len(CardList)):
             print(j, CardList[j].get_card_content()[0], CardList[j].get_card_content()[1])
 
