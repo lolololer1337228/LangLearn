@@ -3,9 +3,9 @@ import Card
 import random
 
 
-class ModeStrategy(object):
-    def __init__(self, kit: Kit, mode):
-        self.__flag = True
+class ModeStrategy():
+    def __init__(self, flag, kit: Kit, mode):
+        self.__flag = flag
         self.__kit = kit
         self.__sequence = []
         self.__mode = mode
@@ -17,8 +17,8 @@ class ModeStrategy(object):
                 filter_list.append(elem)
         return filter_list
 
-    def create_sequence(self, __kit: Kit, mode) -> list(Card):
-        card_list = __kit.get_card_list()
+    def create_sequence(self, mode) -> None:
+        card_list = self.__kit.get_card_list()
         number_sequence = []
         for i in range(0, len(card_list)):
             number_sequence[i] = i
@@ -46,35 +46,35 @@ class ModeStrategy(object):
             if kit.get_card_list()[index].get_word_rates()[mode] < 0:
                 kit.get_card_list()[index].get_word_rates()[mode] = 0
 
-    def change_word_translation(self):
+    def change_word_translation(self, boolean):
         for i in range (0, len(self.__sequence)):
             self.__sequence[i][0].get_card_content()[0], self.__sequence[i][0].get_card_content()[1]\
                 = self.__sequence[i][0].get_card_content()[1], self.__sequence[i][0].get_card_content()[0]
 
-    def get_card(self, index):
-       return self.__sequence[index]
-
-    def get_len(self):
-        return len(self.__sequence)
-
 
 class ModeChoice(ModeStrategy):
-    def random_words(self, answer, index):
-        alternative = [answer, 0, 0, 0]
-        for i in range (1,3):
-            alternative[i] = random.choise(self.__sequence)
+    def random_words(self, kit: Kit, index):
+        variants = [self.__sequence[index]]
+        other_words_sequence = self.__sequence
+        other_words_sequence.remove(self.__sequence[index])
+        variants += random.sample(other_words_sequence, 3)  # list из элементов __sequence [правильный, рандом, рандом, рандом]
+        random_index = random.randint(0, 3)  # по этому индексу будет лежать правильный ответ
+        variants[0], variants[random_index] = variants[random_index], variants[0]
+        return [random_index, variants]
 
-
-   # def label(self, is_correct) -> bool:
-   #     pass
+    def check(self, answer, index) -> bool:
+        random_words = self.random_words(self.__kit, index)  # [индекс правильного, массив со всеми]
+        return answer == random_words[0]  # проверяем ответ(int от 0 до 3) с индексом правильного
 
 
 class ModeWrite(ModeStrategy):
     def check(self, answer, index):
-        return answer == self.__sequence[index][0].get_card_content()[1]
+        return answer == self.__sequence[index].get_card_content()[1]
 
 
 class ModeRotation(ModeStrategy):
-    def rotation(self, index):
-        self.change_word_translation()
-        return self.__sequence[index][0].get_card_content[0]
+    def rotation(self, current_pair, current_word: str):
+        return current_pair[0] if current_word == current_pair[1] else current_pair[2]
+
+    def check(self, answer: bool):
+        return answer
