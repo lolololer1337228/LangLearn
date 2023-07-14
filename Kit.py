@@ -1,4 +1,9 @@
 import Card
+import os
+import time
+import Mode_interface
+
+
 
 class Kit():
     def __init__(self, name):
@@ -9,7 +14,7 @@ class Kit():
     def get_name_kit(self) -> str:
         return self.__name
 
-    def get_array_of_kit(self) -> list:
+    def get_card_list(self) -> list:
         return self.__card_list
 
     def change_name(self, new_name) -> bool:
@@ -38,7 +43,38 @@ class Kit():
     def reset_counter(self) -> None:
         self.__progress = 0
 
-    #def start_mode1(self):
+    def StartModule(self, mode):
+        if mode == 1:
+            Mod = Mode_interface.ModeWrite(self, mode)
+            print("Режим 'Письмо'", '/n')
+        elif mode == 2:
+            Mod = Mode_interface.ModeChoice(self, mode)
+            print("Режим 'Тест'", '/n')
+
+        Mod.create_sequence(self, mode)
+        i = 0
+        while (i != Mod.get_len()):
+            print("Введите 'q' чтобы выйти из режима", '\n')
+            current_card = Mod.get_card(i)
+            print("Как переводится это слово:", current_card.get_card_content()[0], '\n')
+            user_input = input("Введите перевод")
+            if (user_input == 'q') or ():
+                break
+
+            if mode == 1:
+                answer = Mod.check(user_input, i)
+            #elif mode == 2:
+            #    answer =
+            if answer:
+                print("Правильно!")
+            else:
+                print("Неправильно")
+            Mod.change_rate(self, mode, i, answer)
+            i += 1
+            time.sleep(2)
+            os.system('cls')
+
+
 
 
 
