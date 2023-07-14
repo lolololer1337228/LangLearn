@@ -17,8 +17,8 @@ class ModeStrategy(object):
                 filter_list.append(elem)
         return filter_list
 
-    def create_sequence(self, __kit: Kit, mode) -> list(Card):
-        card_list = __kit.get_card_list()
+    def create_sequence(self, mode) -> None:
+        card_list = self.__kit.get_card_list()
         number_sequence = []
         for i in range(0, len(card_list)):
             number_sequence[i] = i
